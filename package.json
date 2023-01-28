@@ -1,0 +1,53 @@
+{
+  "name": "vite-mahlzeit-obfuscator",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "A plugin to obfuscate javascript for Vite at build time.",
+  "homepage": "https://github.com/FranciscoMendes10866/vite-mahlzeit-obfuscator#README",
+  "bugs": {
+    "url": "https://github.com/FranciscoMendes10866/vite-mahlzeit-obfuscator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranciscoMendes10866/vite-mahlzeit-obfuscator.git"
+  },
+  "keywords": [
+    "obfuscator",
+    "vite",
+    "vite obfuscator",
+    "plugin",
+    "javascript obfuscator",
+    "vite obfuscator",
+    "vite",
+    "vite-obfuscator",
+    "security"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --treeshake",
+    "lint": "tsc"
+  },
+  "author": {
+    "name": "Francisco Mendes",
+    "email": "fmendes_dev@protonmail.ch",
+    "url": "https://github.com/FranciscoMendes10866"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "javascript-obfuscator": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0"
+  }
+}
