@@ -14,7 +14,7 @@ const { obfuscate } = obfuscator;
 function plugin(opts?: IOptions): VitePlugin {
   const includeRegEx = opts?.includeRegEx ?? INCLUDE_REGEX;
   const excludeRegEx = opts?.includeRegEx ?? EXCLUDE_REGEX;
-  const obfustactionOpts = opts?.options ?? DEFAULT_OBFUSCATION_OPTIONS;
+  const obfuscatorOptions = opts?.options ?? DEFAULT_OBFUSCATION_OPTIONS;
 
   let canObfuscate: boolean = true;
 
@@ -22,12 +22,12 @@ function plugin(opts?: IOptions): VitePlugin {
     name: "vite-mahlzeit-obfuscator",
     enforce: "post",
     buildStart: () => {
-      if (!includeRegEx) {
+      if (!(includeRegEx instanceof RegExp)) {
         console.warn("includeRegEx must be a regular expression");
         canObfuscate = false;
       }
 
-      if (!excludeRegEx) {
+      if (!(excludeRegEx instanceof RegExp)) {
         console.warn("excludeRegEx must be a regular expression");
         canObfuscate = false;
       }
@@ -41,12 +41,12 @@ function plugin(opts?: IOptions): VitePlugin {
       const isLegible = includeMatcher(id) && excludeMatcher(id);
 
       if (isLegible) {
-        const obfuscationResult = obfuscate(code, obfustactionOpts);
+        const obfuscationResult = obfuscate(code, obfuscatorOptions);
 
         return {
           code: obfuscationResult.getObfuscatedCode(),
-          ...(obfustactionOpts.sourceMap &&
-          obfustactionOpts.sourceMapMode !== "inline"
+          ...(obfuscatorOptions.sourceMap &&
+          obfuscatorOptions.sourceMapMode !== "inline"
             ? { map: obfuscationResult.getSourceMap() }
             : {}),
         };
