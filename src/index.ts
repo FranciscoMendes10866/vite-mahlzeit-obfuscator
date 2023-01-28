@@ -1,5 +1,5 @@
 import type { Plugin as VitePlugin } from "vite";
-import { obfuscate } from "javascript-obfuscator";
+import obfuscator from "javascript-obfuscator";
 
 import {
   DEFAULT_OBFUSCATION_OPTIONS,
@@ -8,6 +8,8 @@ import {
   fileMatcher,
 } from "./utils";
 import { IOptions } from "./types";
+
+const { obfuscate } = obfuscator;
 
 function plugin(opts?: IOptions): VitePlugin {
   const includeRegEx = opts?.includeRegEx ?? INCLUDE_REGEX;
