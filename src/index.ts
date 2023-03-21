@@ -21,6 +21,7 @@ function plugin(opts?: IOptions): VitePlugin {
   return {
     name: "vite-mahlzeit-obfuscator",
     enforce: "post",
+    apply: "build",
     buildStart: () => {
       if (!(includeRegEx instanceof RegExp)) {
         console.warn("includeRegEx must be a regular expression");
